@@ -65,7 +65,7 @@
             box-shadow: var(--box-shadow);
             margin-bottom: 30px;
             position: relative;
-            overflow: hidden;
+            overflow: visible; /* تم التغيير ليكون مرئي */
         }
 
         header::before {
@@ -85,7 +85,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
             position: relative;
-            z-index: 1;
+            z-index: 1000; /* زيادة z-index */
             gap: 20px;
         }
 
@@ -136,11 +136,11 @@
             margin: 10px 0;
         }
 
-        /* قائمة التنقل */
+        /* قائمة التنقل - تم التصحيح */
         .nav-menu {
             position: relative;
             display: inline-block;
-            z-index: 1000;
+            z-index: 1001; /* زيادة z-index */
         }
 
         .menu-btn {
@@ -170,11 +170,12 @@
             display: none;
             position: absolute;
             left: 0;
+            top: 100%; /* التأكد من ظهور أسفل الزر */
             background: white;
             min-width: 280px;
             box-shadow: var(--box-shadow);
             border-radius: var(--border-radius);
-            z-index: 1001;
+            z-index: 1002; /* أعلى z-index */
             margin-top: 10px;
             overflow: hidden;
             border: 1px solid #e0e0e0;
@@ -712,17 +713,6 @@
             border-right: 4px solid var(--success);
             display: none;
         }
-
-        .data-info {
-            background: rgba(52, 152, 219, 0.1);
-            color: #2980b9;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-top: 15px;
-            text-align: center;
-            border-right: 4px solid #3498db;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -778,7 +768,6 @@
             </div>
             <div class="error-message" id="errorMessage"></div>
             <div class="success-message" id="successMessage"></div>
-            <div class="data-info" id="dataInfo"></div>
         </section>
 
         <div class="loading" id="loadingIndicator">
@@ -923,7 +912,7 @@
                 <div class="contact-info">
                     <p><i class="fas fa-phone"></i> هاتف المدرسة: 123456789</p>
                     <p><i class="fas fa-envelope"></i> البريد الإلكتروني: info@school.edu</p>
-                    <p><i class="fas fa-map-marker-alt"></i> العنوان: سلطنة عمان، محافظة مسقط</p>
+                    <p><i class="fas fa-map-marker-alt"></i> العنوان: سلطنة عمان، محافظة الظاهرة- ولاية عبري - العراقي</p>
                 </div>
                 <div class="school-name">
                     <h3>مدرسة عباد بن بشر للتعليم الأساسي</h3>
@@ -931,7 +920,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; 2023 منصة أثر لمادة التربية الإسلامية</p>
+                <p>جميع الحقوق محفوظة &copy; 2025 منصة أثر لمادة التربية الإسلامية</p>
             </div>
         </div>
     </footer>
@@ -943,7 +932,6 @@
             const loadingIndicator = document.getElementById('loadingIndicator');
             const errorMessage = document.getElementById('errorMessage');
             const successMessage = document.getElementById('successMessage');
-            const dataInfo = document.getElementById('dataInfo');
             const menuBtn = document.getElementById('menuBtn');
             const dropdownMenu = document.getElementById('dropdownMenu');
             
@@ -955,7 +943,6 @@
                     loadingIndicator.style.display = 'block';
                     errorMessage.style.display = 'none';
                     successMessage.style.display = 'none';
-                    dataInfo.style.display = 'none';
                     
                     console.log('بدء تحميل البيانات من السجلات الرسمية...');
                     
@@ -980,13 +967,6 @@
                     if (Object.keys(studentsData).length > 0) {
                         successMessage.textContent = `✅ تم تحميل بيانات ${Object.keys(studentsData).length} طالب من السجلات الرسمية`;
                         successMessage.style.display = 'block';
-                        
-                        // عرض بعض الأرقام المتاحة للمستخدم
-                        const availableIds = Object.keys(studentsData).slice(0, 5);
-                        if (availableIds.length > 0) {
-                            dataInfo.textContent = `📊 الأرقام المتاحة: ${availableIds.join(', ')}`;
-                            dataInfo.style.display = 'block';
-                        }
                     } else {
                         throw new Error('لم يتم العثور على بيانات الطلاب في الجدول');
                     }
@@ -1163,15 +1143,17 @@
                 });
             }
 
-            // فتح وإغلاق القائمة
+            // فتح وإغلاق القائمة - تم التصحيح
             menuBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 dropdownMenu.classList.toggle('show');
             });
 
             // إغلاق القائمة عند النقر خارجها
-            document.addEventListener('click', function() {
-                dropdownMenu.classList.remove('show');
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
             });
 
             // منع إغلاق القائمة عند النقر داخلها

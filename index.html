@@ -136,7 +136,7 @@
             margin: 10px 0;
         }
 
-        /* قائمة التنقل */
+        /* قائمة التنقل - تم التعديل */
         .nav-menu {
             position: relative;
             display: inline-block;
@@ -168,15 +168,15 @@
 
         .dropdown-content {
             display: none;
-            position: absolute;
-            left: 0;
-            top: 100%;
+            position: fixed; /* تغيير من absolute إلى fixed */
+            top: 120px; /* ظهور أسفل الهيدر مباشرة */
+            left: 50%;
+            transform: translateX(-50%);
             background: white;
-            min-width: 280px;
+            min-width: 300px;
             box-shadow: var(--box-shadow);
             border-radius: var(--border-radius);
             z-index: 1002;
-            margin-top: 10px;
             overflow: hidden;
             border: 1px solid #e0e0e0;
         }
@@ -189,11 +189,11 @@
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateX(-50%) translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(-50%) translateY(0);
             }
         }
 
@@ -703,24 +703,12 @@
 
         .footer-content {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             gap: 25px;
             position: relative;
             z-index: 1;
-        }
-
-        .contact-info {
-            text-align: right;
-        }
-
-        .contact-info p {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: flex-end;
         }
 
         .school-name h3 {
@@ -765,18 +753,10 @@
                 text-align: center;
             }
             
-            .contact-info {
-                text-align: center;
-            }
-            
-            .contact-info p {
-                justify-content: center;
-            }
-            
             .dropdown-content {
+                min-width: 250px;
                 left: 50%;
                 transform: translateX(-50%);
-                min-width: 250px;
             }
             
             .exam-table {
@@ -1002,7 +982,7 @@
 
             <div class="news-item">
                 <h4>📞 التواصل مع الإدارة</h4>
-                <p>للاستفسارات يمكنكم التواصل مع إدارة المدرسة خلال أوقات الدوام الرسمي على الهاتف: 123456789</p>
+                <p>للاستفسارات يمكنكم التواصل مع إدارة المدرسة خلال أوقات الدوام الرسمي.</p>
             </div>
 
             <div class="news-item">
@@ -1145,18 +1125,13 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> هاتف المدرسة: 123456789</p>
-        
-                    <p><i class="fas fa-map-marker-alt"></i> العنوان: سلطنة عمان، محافظة الظاهرة ولاية عبري - العراقي</p>
-                </div>
                 <div class="school-name">
                     <h3>مدرسة عباد بن بشر للتعليم الأساسي</h3>
                     <p>نحو جيل متميز في العلم والأخلاق</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; 2023 منصة أثر لمادة التربية الإسلامية</p>
+                <p>جميع الحقوق محفوظة &copy; 2025 منصة أثر لمادة التربية الإسلامية</p>
             </div>
         </div>
     </footer>
@@ -1378,18 +1353,20 @@
                 });
             }
 
-            // التعامل مع القائمة المنسدلة
+            // التعامل مع القائمة المنسدلة - تم التعديل
             menuBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 dropdownMenu.classList.toggle('show');
             });
 
+            // إغلاق القائمة عند النقر في أي مكان
             document.addEventListener('click', function(e) {
                 if (!dropdownMenu.contains(e.target) && !menuBtn.contains(e.target)) {
                     dropdownMenu.classList.remove('show');
                 }
             });
 
+            // منع إغلاق القائمة عند النقر داخلها
             dropdownMenu.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
@@ -1399,7 +1376,7 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const section = this.getAttribute('data-section');
-                    dropdownMenu.classList.remove('show');
+                    dropdownMenu.classList.remove('show'); // إخفاء القائمة عند النقر
                     
                     switch(section) {
                         case 'news':
@@ -1424,4 +1401,3 @@
     </script>
 </body>
 </html>
-

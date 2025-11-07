@@ -136,7 +136,7 @@
             margin: 10px 0;
         }
 
-        /* قائمة التنقل - تم التصحيح بشكل نهائي */
+        /* قائمة التنقل */
         .nav-menu {
             position: relative;
             display: inline-block;
@@ -628,33 +628,6 @@
             z-index: 1;
         }
 
-        .floating-elements {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 100;
-        }
-
-        .floating-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-bottom: 15px;
-        }
-
-        .floating-btn:hover {
-            transform: scale(1.1);
-        }
-
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -753,15 +726,6 @@
     </style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-btn" id="scrollTopBtn">
-            <i class="fas fa-arrow-up"></i>
-        </div>
-        <div class="floating-btn" id="themeToggle">
-            <i class="fas fa-palette"></i>
-        </div>
-    </div>
-
     <header>
         <div class="container">
             <div class="header-content">
@@ -819,7 +783,7 @@
 
         <div class="loading" id="loadingIndicator">
             <div class="loading-spinner"></div>
-            <p>جاري تحميل البيانات...</p>
+            <p>جاري تحميل البيانات من السجلات الرسمية...</p>
         </div>
 
         <section class="student-info" id="studentInfo">
@@ -886,7 +850,7 @@
 
                 <div class="grade-card">
                     <div class="grade-title">
-                        <span>مناقشة الواجب</span>
+                        <span>مناقشة الواجب المنزلي</span>
                         <span class="grade-value" id="discussionGrade">0</span>
                     </div>
                     <div class="grade-max">من 2 درجات</div>
@@ -980,64 +944,10 @@
             const errorMessage = document.getElementById('errorMessage');
             const successMessage = document.getElementById('successMessage');
             const dataInfo = document.getElementById('dataInfo');
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-            const themeToggle = document.getElementById('themeToggle');
             const menuBtn = document.getElementById('menuBtn');
             const dropdownMenu = document.getElementById('dropdownMenu');
             
             let studentsData = {};
-
-            // بيانات تجريبية للاختبار
-            const demoData = {
-                "AB1001": {
-                    name: "أحمد محمد علي",
-                    class: "الصف السابع - أ",
-                    tilaawa: 5,
-                    hifz: 4,
-                    shortQ1: 3,
-                    shortQ2: 5,
-                    homework: 6,
-                    discussion: 2,
-                    quiz1: 12,
-                    quiz2: 14,
-                    continuous: 51,
-                    final: 35,
-                    total: 86,
-                    notes: "طالب مجتهد ومتميز في الحفظ، يحتاج إلى تحسين في التلاوة. يظهر تفاعلاً جيداً في الصف ويؤدي واجباته بانتظام."
-                },
-                "CD1002": {
-                    name: "فاطمة عبد الله سعيد",
-                    class: "الصف السابع - ب",
-                    tilaawa: 6,
-                    hifz: 6,
-                    shortQ1: 4,
-                    shortQ2: 6,
-                    homework: 5,
-                    discussion: 2,
-                    quiz1: 14,
-                    quiz2: 13,
-                    continuous: 56,
-                    final: 38,
-                    total: 94,
-                    notes: "طالبة متميزة في جميع الجوانب، حافظت على تفوقها طوال الفصل. لديها قدرة عالية على الحفظ والفهم."
-                },
-                "EF1003": {
-                    name: "خالد سالم الكعبي",
-                    class: "الصف الثامن - أ",
-                    tilaawa: 4,
-                    hifz: 3,
-                    shortQ1: 2,
-                    shortQ2: 4,
-                    homework: 4,
-                    discussion: 1,
-                    quiz1: 10,
-                    quiz2: 11,
-                    continuous: 39,
-                    final: 28,
-                    total: 67,
-                    notes: "يحتاج إلى مزيد من الجهد في الحفظ والمذاكرة المنتظمة. ننصح بمتابعة واجباته بشكل أكبر."
-                }
-            };
 
             // تحميل البيانات من جدول البيانات
             async function loadDataFromSheet() {
@@ -1047,9 +957,9 @@
                     successMessage.style.display = 'none';
                     dataInfo.style.display = 'none';
                     
-                    console.log('بدء تحميل البيانات من Google Sheets...');
+                    console.log('بدء تحميل البيانات من السجلات الرسمية...');
                     
-                    // استخدام الرابط المباشر بدون CORS proxy
+                    // استخدام الرابط المباشر
                     const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTqsnwzc-XWv5Tv-sEABj41rxAF2yLcF_9RWZO8pQZQc-TqOs9pBWeogMfoThdZk9dSlxtALM_NEFSb/pub?gid=1112476829&single=true&output=csv');
                     
                     if (!response.ok) {
@@ -1060,7 +970,7 @@
                     console.log('تم تحميل البيانات بنجاح:', csvData);
                     
                     if (!csvData || csvData.trim().length === 0) {
-                        throw new Error('البيانات المستلمة فارغة');
+                        throw new Error('البيانات المستلمة فارغة - يرجى التحقق من جدول البيانات');
                     }
                     
                     // معالجة البيانات وتحويلها إلى JSON
@@ -1068,15 +978,17 @@
                     console.log('بيانات الطلاب بعد المعالجة:', studentsData);
                     
                     if (Object.keys(studentsData).length > 0) {
-                        successMessage.textContent = `✅ تم تحميل بيانات ${Object.keys(studentsData).length} طالب بنجاح`;
+                        successMessage.textContent = `✅ تم تحميل بيانات ${Object.keys(studentsData).length} طالب من السجلات الرسمية`;
                         successMessage.style.display = 'block';
-                        dataInfo.textContent = `📊 جاهز للبحث. جرب الأرقام: ${Object.keys(studentsData).slice(0, 3).join(', ')}`;
-                        dataInfo.style.display = 'block';
+                        
+                        // عرض بعض الأرقام المتاحة للمستخدم
+                        const availableIds = Object.keys(studentsData).slice(0, 5);
+                        if (availableIds.length > 0) {
+                            dataInfo.textContent = `📊 الأرقام المتاحة: ${availableIds.join(', ')}`;
+                            dataInfo.style.display = 'block';
+                        }
                     } else {
-                        // استخدام البيانات التجريبية إذا لم توجد بيانات
-                        studentsData = demoData;
-                        dataInfo.textContent = 'ℹ️ يتم استخدام بيانات تجريبية للاختبار. جرب: AB1001, CD1002, EF1003';
-                        dataInfo.style.display = 'block';
+                        throw new Error('لم يتم العثور على بيانات الطلاب في الجدول');
                     }
                     
                     loadingIndicator.style.display = 'none';
@@ -1085,17 +997,13 @@
                     console.error('حدث خطأ في تحميل البيانات:', error);
                     loadingIndicator.style.display = 'none';
                     
-                    // استخدام البيانات التجريبية في حالة فشل التحميل
-                    studentsData = demoData;
-                    errorMessage.textContent = `⚠️ تم تحميل البيانات التجريبية. (${error.message})`;
+                    errorMessage.textContent = `❌ خطأ في تحميل البيانات: ${error.message}. يرجى التأكد من صحة الرابط وإعدادات النشر`;
                     errorMessage.style.display = 'block';
-                    dataInfo.textContent = 'ℹ️ جرب الأرقام: AB1001, CD1002, EF1003';
-                    dataInfo.style.display = 'block';
                     return false;
                 }
             }
 
-            // معالجة بيانات CSV وتحويلها إلى JSON
+            // معالجة بيانات CSV وتحويلها إلى JSON مع الترتيب الصحيح للأعمدة
             function parseCSVData(csv) {
                 const lines = csv.split('\n').filter(line => line.trim() !== '');
                 const result = {};
@@ -1111,49 +1019,58 @@
                 
                 // البيانات (من السطر الثاني)
                 for (let i = 1; i < lines.length; i++) {
-                    // معالجة CSV بشكل أفضل للتعامل مع الفواصل داخل الخلايا
-                    const currentLine = [];
-                    let inQuotes = false;
-                    let currentField = '';
+                    const currentLine = parseCSVLine(lines[i]);
                     
-                    for (let j = 0; j < lines[i].length; j++) {
-                        const char = lines[i][j];
-                        if (char === '"') {
-                            inQuotes = !inQuotes;
-                        } else if (char === ',' && !inQuotes) {
-                            currentLine.push(currentField.trim());
-                            currentField = '';
-                        } else {
-                            currentField += char;
-                        }
-                    }
-                    currentLine.push(currentField.trim());
-                    
-                    // التأكد من أن السطر يحتوي على بيانات كافية
-                    if (currentLine.length >= 16) {
+                    // التأكد من أن السطر يحتوي على بيانات كافية (17 عمود حسب الهيكل المحدد)
+                    if (currentLine.length >= 17) {
                         const studentId = currentLine[1]; // العمود B (رقم الطالب)
                         
                         if (studentId && studentId.length >= 2) {
                             result[studentId] = {
-                                name: currentLine[2] || "غير معروف",
-                                class: currentLine[3] || "غير محدد",
-                                tilaawa: parseFloat(currentLine[5]) || 0,
-                                hifz: parseFloat(currentLine[6]) || 0,
-                                shortQ1: parseFloat(currentLine[7]) || 0,
-                                shortQ2: parseFloat(currentLine[8]) || 0,
-                                homework: parseFloat(currentLine[9]) || 0,
-                                discussion: parseFloat(currentLine[10]) || 0,
-                                quiz1: parseFloat(currentLine[11]) || 0,
-                                quiz2: parseFloat(currentLine[12]) || 0,
-                                continuous: parseFloat(currentLine[13]) || 0,
-                                final: parseFloat(currentLine[14]) || 0,
-                                total: parseFloat(currentLine[15]) || 0,
-                                notes: currentLine[4] || "لا توجد ملاحظات"
+                                name: currentLine[2] || "غير معروف",                    // العمود C (اسم الطالب)
+                                class: currentLine[3] || "غير محدد",                    // العمود D (الصف)
+                                subject: currentLine[4] || "التربية الإسلامية",         // العمود E (المادة)
+                                notes: currentLine[5] || "لا توجد ملاحظات",            // العمود F (ملاحظات المعلم)
+                                tilaawa: parseFloat(currentLine[6]) || 0,               // العمود G (التلاوة من 6)
+                                hifz: parseFloat(currentLine[7]) || 0,                  // العمود H (الحفظ من 6)
+                                shortQ1: parseFloat(currentLine[8]) || 0,               // العمود I (سؤال قصير1 من 4)
+                                shortQ2: parseFloat(currentLine[9]) || 0,               // العمود J (سؤال قصير2 من 6)
+                                homework: parseFloat(currentLine[10]) || 0,             // العمود K (واجب منزلي من 6)
+                                discussion: parseFloat(currentLine[11]) || 0,           // العمود L (مناقشة الواجب المنزلي 2)
+                                quiz1: parseFloat(currentLine[12]) || 0,                // العمود M (اختبار قصير 1 من 15)
+                                quiz2: parseFloat(currentLine[13]) || 0,                // العمود N (اختبار قصير2 من 15)
+                                continuous: parseFloat(currentLine[14]) || 0,           // العمود O (مجموع التقويم المستمر 60)
+                                final: parseFloat(currentLine[15]) || 0,                // العمود P (اختبار نهائي 40)
+                                total: parseFloat(currentLine[16]) || 0                 // العمود Q (المجموع الكلي 100)
                             };
                         }
                     }
                 }
                 
+                return result;
+            }
+
+            // دالة مساعدة لتحليل سطر CSV بشكل صحيح
+            function parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                
+                // إضافة الحقل الأخير
+                result.push(current.trim());
                 return result;
             }
 
@@ -1181,7 +1098,7 @@
                     const student = studentsData[studentId];
                     displayStudentData(student);
                 } else {
-                    errorMessage.textContent = '❌ رقم الطالب غير موجود في النظام. يرجى التحقق من الرقم والمحاولة مرة أخرى.';
+                    errorMessage.textContent = '❌ رقم الطالب غير موجود في السجلات الرسمية. يرجى التحقق من الرقم والمحاولة مرة أخرى.';
                     errorMessage.style.display = 'block';
                     successMessage.style.display = 'none';
                     studentInfo.classList.remove('active');
@@ -1246,17 +1163,7 @@
                 });
             }
 
-            // زر العودة إلى الأعلى
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // تبديل السمة
-            themeToggle.addEventListener('click', function() {
-                alert('سيتم إضافة خاصية تبديل السماء في التحديثات القادمة!');
-            });
-
-            // فتح وإغلاق القائمة - تم التصحيح بشكل نهائي
+            // فتح وإغلاق القائمة
             menuBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 dropdownMenu.classList.toggle('show');

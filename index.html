@@ -309,30 +309,148 @@
             background: rgba(26, 95, 122, 0.05);
         }
 
-        .suggestions-form {
-            background: white;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
+        .form-group {
+            margin-bottom: 25px;
         }
 
-        .form-link {
-            display: inline-block;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 15px 30px;
-            border-radius: var(--border-radius);
-            text-decoration: none;
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
             font-size: 1.1rem;
             transition: var(--transition);
-            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.9);
         }
 
-        .form-link:hover {
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(87, 197, 182, 0.3);
+            background: white;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-option input, .checkbox-option input {
+            width: auto;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(26, 95, 122, 0.3);
+        }
+
+        button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(26, 95, 122, 0.4);
+        }
+
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        button.secondary {
+            background: #f8f9fa;
+            color: var(--dark);
+            border: 2px solid #e0e0e0;
+        }
+
+        button.secondary:hover {
+            background: #e9ecef;
+        }
+
+        .confirmation-message {
+            display: none;
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--success);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-right: 4px solid var(--success);
+            margin-top: 20px;
+        }
+
+        .error-message {
+            display: none;
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+            text-align: center;
+            border-right: 4px solid var(--danger);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .required {
+            color: var(--danger);
         }
 
         .scrolling-info {
@@ -411,56 +529,6 @@
         .form-group {
             flex: 1;
             min-width: 250px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            font-size: 1.1rem;
-            transition: var(--transition);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(87, 197, 182, 0.3);
-            background: white;
-        }
-
-        button {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(26, 95, 122, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.4);
-        }
-
-        button:active {
-            transform: translateY(1px);
         }
 
         .student-info {
@@ -767,49 +835,15 @@
             .exam-table th, .exam-table td {
                 padding: 10px;
             }
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .loading-spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--accent);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            background: rgba(231, 76, 60, 0.1);
-            color: var(--danger);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-top: 15px;
-            text-align: center;
-            border-right: 4px solid var(--danger);
-            display: none;
-        }
-
-        .success-message {
-            background: rgba(46, 204, 113, 0.1);
-            color: var(--success);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-top: 15px;
-            text-align: center;
-            border-right: 4px solid var(--success);
-            display: none;
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -962,22 +996,166 @@
             </table>
         </section>
 
-        <!-- قسم المقترحات والآراء -->
+        <!-- قسم المقترحات والآراء - تم التحديث -->
         <section class="content-section" id="suggestionsSection">
             <h2><i class="fas fa-comments"></i> المقترحات والآراء</h2>
             
-            <div class="suggestions-form">
-                <p>نرحب بملاحظاتكم ومقترحاتكم القيمة التي تساعدنا على تحسين الخدمات المقدمة</p>
-                <p>يمكنكم مشاركة آرائكم من خلال النموذج الإلكتروني المخصص</p>
+            <!-- النموذج المخفي للإرسال -->
+            <form id="hiddenForm" method="GET" target="hiddenFrame" style="display: none;">
+                <input type="hidden" name="timestamp" id="hiddenTimestamp">
+                <input type="hidden" name="senderType" id="hiddenSenderType">
+                <input type="hidden" name="fullName" id="hiddenFullName">
+                <input type="hidden" name="contactInfo" id="hiddenContactInfo">
+                <input type="hidden" name="studentId" id="hiddenStudentId">
+                <input type="hidden" name="suggestionType" id="hiddenSuggestionType">
+                <input type="hidden" name="category" id="hiddenCategory">
+                <input type="hidden" name="title" id="hiddenTitle">
+                <input type="hidden" name="details" id="hiddenDetails">
+                <input type="hidden" name="impact" id="hiddenImpact">
+                <input type="hidden" name="followup" id="hiddenFollowup">
+                <input type="hidden" name="improvementIdeas" id="hiddenImprovementIdeas">
+            </form>
+
+            <!-- iframe مخفي لاستقبال الرد -->
+            <iframe name="hiddenFrame" id="hiddenFrame" style="display: none;"></iframe>
+
+            <!-- النموذج الرئيسي -->
+            <form id="suggestionsForm">
+                <div class="form-group">
+                    <label for="senderType">أنتم <span class="required">*</span></label>
+                    <select id="senderType" required>
+                        <option value="">اختر نوع المرسل</option>
+                        <option value="طالب">طالب</option>
+                        <option value="ولي أمر">ولي أمر</option>
+                        <option value="معلم">معلم</option>
+                        <option value="آخر">آخر</option>
+                    </select>
+                </div>
                 
-                <a href="https://sultanalwaeli.github.io/sta1/" class="form-link" target="_blank">
-                    <i class="fas fa-edit"></i> الانتقال إلى نموذج المقترحات
-                </a>
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل <span class="required">*</span></label>
+                    <input type="text" id="fullName" required placeholder="أدخل اسمك الكامل">
+                </div>
                 
-                <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">
-                    سيتم فتح نموذج جوجل في نافذة جديدة حيث يمكنكم كتابة ملاحظاتكم ومقترحاتكم
-                </p>
-            </div>
+                <div class="form-group">
+                    <label for="contactInfo">معلومات التواصل <span class="required">*</span></label>
+                    <input type="text" id="contactInfo" required placeholder="رقم الهاتف أو البريد الإلكتروني">
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentId">رقم الطالب (إن وجد)</label>
+                    <input type="text" id="studentId" placeholder="مثال: AB1234">
+                </div>
+                
+                <div class="form-group">
+                    <label>نوع المقترح/الملاحظة <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="type-suggestion" name="suggestionType" value="مقترح تطوير" required>
+                            <label for="type-suggestion">مقترح تطوير</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="type-complaint" name="suggestionType" value="شكوى">
+                            <label for="type-complaint">شكوى</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="type-inquiry" name="suggestionType" value="استفسار">
+                            <label for="type-inquiry">استفسار</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="type-praise" name="suggestionType" value="شكر وتقدير">
+                            <label for="type-praise">شكر وتقدير</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestionCategory">التصنيف <span class="required">*</span></label>
+                    <select id="suggestionCategory" required>
+                        <option value="">اختر التصنيف المناسب</option>
+                        <option value="العملية التعليمية">العملية التعليمية</option>
+                        <option value="منصة أثر الإلكترونية">منصة أثر الإلكترونية</option>
+                        <option value="الكادر التعليمي">الكادر التعليمي</option>
+                        <option value="مرافق المدرسة">مرافق المدرسة</option>
+                        <option value="الأنشطة الطلابية">الأنشطة الطلابية</option>
+                        <option value="الإدارة المدرسية">الإدارة المدرسية</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestionTitle">عنوان المقترح/الملاحظة <span class="required">*</span></label>
+                    <input type="text" id="suggestionTitle" required placeholder="اكتب عنواناً موجزاً للملاحظة">
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestionDetails">تفاصيل المقترح/الملاحظة <span class="required">*</span></label>
+                    <textarea id="suggestionDetails" required placeholder="اشرح بالتفصيل مقترحك أو ملاحظتك..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>كيف تصف تأثير هذه المشكلة أو الفكرة؟</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="impact-high" name="impactLevel" value="تأثير كبير">
+                            <label for="impact-high">تأثير كبير</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="impact-medium" name="impactLevel" value="تأثير متوسط">
+                            <label for="impact-medium">تأثير متوسط</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="impact-low" name="impactLevel" value="تأثير محدود">
+                            <label for="impact-low">تأثير محدود</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>هل تود متابعة هذه الملاحظة؟</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="followup-yes" name="followup" value="نعم، أود المتابعة">
+                            <label for="followup-yes">نعم، أود المتابعة</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="followup-no" name="followup" value="لا، مجرد ملاحظة" checked>
+                            <label for="followup-no">لا، مجرد ملاحظة</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="improvementIdeas">اقتراحاتك للتحسين (اختياري)</label>
+                    <textarea id="improvementIdeas" placeholder="إذا كان لديك أفكار محددة للتحسين، اذكرها هنا..."></textarea>
+                </div>
+                
+                <div class="loading" id="suggestionsLoading">
+                    <div class="loading-spinner"></div>
+                    <p>جاري إرسال البيانات...</p>
+                </div>
+                
+                <div class="error-message" id="suggestionsError"></div>
+                
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> إرسال المقترح
+                    </button>
+                    <button type="button" class="secondary" id="resetBtn">
+                        <i class="fas fa-redo"></i> مسح النموذج
+                    </button>
+                </div>
+                
+                <div class="confirmation-message" id="confirmationMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>شكراً لك على مشاركة رأيك!</h3>
+                    <p>تم استلام مقترحك بنجاح وسيتم دراسته من قبل الفريق المختص.</p>
+                    <p>رقم تتبع المقترح: <strong id="trackingNumber"></strong></p>
+                    <button type="button" class="secondary" onclick="resetSuggestionsForm()" style="margin-top: 15px;">
+                        <i class="fas fa-plus"></i> إرسال مقترح جديد
+                    </button>
+                </div>
+            </form>
         </section>
 
         <!-- قسم المساعدة والدعم -->
@@ -1156,7 +1334,21 @@
             const dropdownMenu = document.getElementById('dropdownMenu');
             const contentSections = document.querySelectorAll('.content-section');
             
+            // عناصر نموذج المقترحات
+            const suggestionsForm = document.getElementById('suggestionsForm');
+            const hiddenForm = document.getElementById('hiddenForm');
+            const resetBtn = document.getElementById('resetBtn');
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            const suggestionsLoading = document.getElementById('suggestionsLoading');
+            const suggestionsError = document.getElementById('suggestionsError');
+            const submitBtn = document.getElementById('submitBtn');
+            const hiddenFrame = document.getElementById('hiddenFrame');
+            
             let studentsData = {};
+
+            // رابط النشر لنموذج المقترحات
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyffiRewwsJczQXU2a1aUQR1yxiwaVkg-_EwFBBivxwHCQJfPMMGVpchslrae6NRY8Y/exec';
+            hiddenForm.action = SCRIPT_URL;
 
             // إخفاء جميع أقسام المحتوى
             function hideAllSections() {
@@ -1400,6 +1592,139 @@
                         case 'help':
                             showSection('helpSection');
                             break;
+                    }
+                });
+            });
+
+            // ========== نموذج المقترحات ==========
+            // إرسال النموذج
+            suggestionsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // التحقق من صحة البيانات
+                if (!validateSuggestionsForm()) {
+                    return;
+                }
+                
+                // إظهار مؤشر التحميل
+                suggestionsLoading.style.display = 'block';
+                suggestionsError.style.display = 'none';
+                submitBtn.disabled = true;
+                
+                try {
+                    // تعبئة النموذج المخفي بالبيانات
+                    document.getElementById('hiddenTimestamp').value = new Date().toLocaleString('ar-SA');
+                    document.getElementById('hiddenSenderType').value = document.getElementById('senderType').value;
+                    document.getElementById('hiddenFullName').value = document.getElementById('fullName').value;
+                    document.getElementById('hiddenContactInfo').value = document.getElementById('contactInfo').value;
+                    document.getElementById('hiddenStudentId').value = document.getElementById('studentId').value || 'غير محدد';
+                    document.getElementById('hiddenSuggestionType').value = document.querySelector('input[name="suggestionType"]:checked').value;
+                    document.getElementById('hiddenCategory').value = document.getElementById('suggestionCategory').value;
+                    document.getElementById('hiddenTitle').value = document.getElementById('suggestionTitle').value;
+                    document.getElementById('hiddenDetails').value = document.getElementById('suggestionDetails').value;
+                    document.getElementById('hiddenImpact').value = document.querySelector('input[name="impactLevel"]:checked')?.value || 'غير محدد';
+                    document.getElementById('hiddenFollowup').value = document.querySelector('input[name="followup"]:checked').value;
+                    document.getElementById('hiddenImprovementIdeas').value = document.getElementById('improvementIdeas').value || 'لا توجد';
+                    
+                    console.log('بيانات النموذج المرسلة:', {
+                        timestamp: document.getElementById('hiddenTimestamp').value,
+                        senderType: document.getElementById('hiddenSenderType').value,
+                        fullName: document.getElementById('hiddenFullName').value,
+                        contactInfo: document.getElementById('hiddenContactInfo').value,
+                        studentId: document.getElementById('hiddenStudentId').value,
+                        suggestionType: document.getElementById('hiddenSuggestionType').value,
+                        category: document.getElementById('hiddenCategory').value,
+                        title: document.getElementById('hiddenTitle').value,
+                        details: document.getElementById('hiddenDetails').value,
+                        impact: document.getElementById('hiddenImpact').value,
+                        followup: document.getElementById('hiddenFollowup').value,
+                        improvementIdeas: document.getElementById('hiddenImprovementIdeas').value
+                    });
+                    
+                    // إرسال النموذج المخفي
+                    hiddenForm.submit();
+                    
+                    // بعد 3 ثوانٍ، نفترض أن الإرسال نجح
+                    setTimeout(function() {
+                        // إخفاء النموذج وإظهار رسالة التأكيد
+                        suggestionsForm.style.display = 'none';
+                        confirmationMessage.style.display = 'block';
+                        
+                        // إنشاء رقم تتبع عشوائي
+                        const trackingId = 'TRK-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                        document.getElementById('trackingNumber').textContent = trackingId;
+                        
+                        suggestionsLoading.style.display = 'none';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                    
+                } catch (error) {
+                    console.error('خطأ في الإرسال:', error);
+                    suggestionsError.textContent = `❌ فشل في إرسال البيانات: ${error.message}. يرجى المحاولة مرة أخرى.`;
+                    suggestionsError.style.display = 'block';
+                    suggestionsLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            });
+            
+            // التحقق من صحة نموذج المقترحات
+            function validateSuggestionsForm() {
+                const requiredFields = suggestionsForm.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = 'var(--danger)';
+                    } else {
+                        field.style.borderColor = '#e0e0e0';
+                    }
+                });
+                
+                // التحقق من اختيار نوع المقترح
+                const suggestionTypeSelected = document.querySelector('input[name="suggestionType"]:checked');
+                if (!suggestionTypeSelected) {
+                    isValid = false;
+                    suggestionsError.textContent = '❌ يرجى اختيار نوع المقترح';
+                    suggestionsError.style.display = 'block';
+                }
+                
+                if (!isValid && !suggestionsError.textContent) {
+                    suggestionsError.textContent = '❌ يرجى ملء جميع الحقول الإلزامية';
+                    suggestionsError.style.display = 'block';
+                }
+                
+                return isValid;
+            }
+            
+            // إعادة تعيين نموذج المقترحات
+            resetBtn.addEventListener('click', function() {
+                resetSuggestionsForm();
+            });
+            
+            // دالة عامة لإعادة تعيين نموذج المقترحات
+            window.resetSuggestionsForm = function() {
+                suggestionsForm.reset();
+                confirmationMessage.style.display = 'none';
+                suggestionsError.style.display = 'none';
+                suggestionsForm.style.display = 'block';
+                suggestionsLoading.style.display = 'none';
+                
+                // إعادة تعيين ألوان الحدود
+                const fields = suggestionsForm.querySelectorAll('input, select, textarea');
+                fields.forEach(field => {
+                    field.style.borderColor = '#e0e0e0';
+                });
+            };
+            
+            // إضافة تحقق فوري للحقول الإلزامية في نموذج المقترحات
+            const requiredFields = suggestionsForm.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                field.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        this.style.borderColor = 'var(--danger)';
+                    } else {
+                        this.style.borderColor = '#e0e0e0';
                     }
                 });
             });

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        /* جميع الأنماط السابقة تبقى كما هي */
+        /* جميع الأنماط السابقة تبقى كما هي مع بعض الإضافات */
         :root {
             --primary: #1a5f7a;
             --secondary: #159895;
@@ -137,7 +137,6 @@
             margin: 10px 0;
         }
 
-        /* قائمة التنقل - تم التعديل */
         .nav-menu {
             position: relative;
             display: inline-block;
@@ -169,8 +168,8 @@
 
         .dropdown-content {
             display: none;
-            position: fixed; /* تغيير من absolute إلى fixed */
-            top: 120px; /* ظهور أسفل الهيدر مباشرة */
+            position: fixed;
+            top: 120px;
             left: 50%;
             transform: translateX(-50%);
             background: white;
@@ -226,7 +225,6 @@
             font-size: 1.1rem;
         }
 
-        /* أقسام المحتوى الجديدة */
         .content-section {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -531,6 +529,43 @@
             min-width: 250px;
         }
 
+        /* إضافة أنماط لاختيار الفصل الدراسي */
+        .semester-selector {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid #d1e7f5;
+        }
+
+        .semester-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .semester-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .semester-option label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .semester-option input[type="radio"]:checked + label {
+            color: var(--primary);
+        }
+
         .student-info {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -594,6 +629,17 @@
             padding: 8px 20px;
             border-radius: 30px;
             font-weight: 700;
+        }
+
+        .semester-badge {
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
         .grades-container {
@@ -844,6 +890,11 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .semester-selector {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -882,12 +933,25 @@
                 <p><i class="fas fa-bullseye"></i> الهدف من المنصة: توفير وسيلة سهلة للطلاب وأولياء الأمور لمتابعة النتائج والسلوكيات</p>
                 <p><i class="fas fa-chart-bar"></i> المنصة تعرض درجات أدوات التقييم المختلفة لمادة التربية الإسلامية</p>
                 <p><i class="fas fa-lock"></i> يمكن لكل طالب الوصول لنتائجه باستخدام الرقم الخاص به</p>
-                <p><i class="fas fa-trending-up"></i> تتبع تطور الأداء الدراسي والسلوكي للطالب خلال الفصل الدراسي</p>
+                <p><i class="fas fa-trending-up"></i> تتبع تطور الأداء الدراسي للطالب خلال الفصلين الدراسيين</p>
             </div>
         </section>
 
         <section class="search-section">
             <h2><i class="fas fa-search"></i> البحث عن نتائج الطالب</h2>
+            
+            <!-- إضافة محدد الفصل الدراسي -->
+            <div class="semester-selector">
+                <div class="semester-option">
+                    <input type="radio" id="semester1" name="semester" value="semester1" checked>
+                    <label for="semester1">الفصل الدراسي الأول</label>
+                </div>
+                <div class="semester-option">
+                    <input type="radio" id="semester2" name="semester" value="semester2">
+                    <label for="semester2">الفصل الدراسي الثاني</label>
+                </div>
+            </div>
+
             <div class="search-form">
                 <div class="form-group">
                     <label for="studentId">رقم الطالب (مكون من حرفين و4 أرقام)</label>
@@ -906,7 +970,7 @@
             <p>جاري تحميل البيانات من السجلات الرسمية...</p>
         </div>
 
-        <!-- قسم المستجدات - تم التحديث -->
+        <!-- قسم المستجدات -->
         <section class="content-section" id="newsSection">
             <h2><i class="fas fa-newspaper"></i> المستجدات</h2>
             
@@ -925,9 +989,13 @@
                 <p>تبدأ امتحانات نهاية الفصل الدراسي الأول يوم <strong>الأحد 21 ديسمبر 2025</strong>. نرجو من الطلاب الاستعداد الجيد والمتابعة المستمرة للدروس.</p>
             </div>
 
+            <div class="news-item">
+                <h4>📚 بدء الفصل الدراسي الثاني</h4>
+                <p>سيبدأ الفصل الدراسي الثاني يوم <strong>الأحد 15 فبراير 2026</strong>. نتمنى للجميع عاماً دراسياً موفقاً.</p>
+            </div>
         </section>
 
-        <!-- قسم مواعيد الاختبارات - تم التحديث -->
+        <!-- قسم مواعيد الاختبارات -->
         <section class="content-section" id="examsSection">
             <h2><i class="fas fa-calendar-alt"></i> متابعة موعد الاختبارات - الصف التاسع</h2>
             
@@ -996,7 +1064,7 @@
             </table>
         </section>
 
-        <!-- قسم المقترحات والآراء - تم التحديث -->
+        <!-- قسم المقترحات والآراء -->
         <section class="content-section" id="suggestionsSection">
             <h2><i class="fas fa-comments"></i> المقترحات والآراء</h2>
             
@@ -1164,7 +1232,7 @@
             
             <div class="news-item">
                 <h4>❓ كيفية استخدام المنصة</h4>
-                <p>للبحث عن نتائج الطالب، قم بإدخال رقم الطالب المكون من حرفين و4 أرقام في خانة البحث ثم اضغط على زر "عرض النتائج".</p>
+                <p>للبحث عن نتائج الطالب، قم بإدخال رقم الطالب المكون من حرفين و4 أرقام في خانة البحث، ثم اختر الفصل الدراسي (الأول أو الثاني) واضغط على زر "عرض النتائج".</p>
             </div>
 
             <div class="news-item">
@@ -1183,6 +1251,9 @@
                 <h2 class="student-name" id="studentName">اسم الطالب</h2>
                 <div class="student-class" id="studentClass">الصف</div>
             </div>
+
+            <!-- إضافة شارة توضح الفصل الدراسي المعروض -->
+            <div class="semester-badge" id="semesterBadge">الفصل الدراسي الأول</div>
 
             <div class="grades-container">
                 <div class="grade-card">
@@ -1333,6 +1404,7 @@
             const menuBtn = document.getElementById('menuBtn');
             const dropdownMenu = document.getElementById('dropdownMenu');
             const contentSections = document.querySelectorAll('.content-section');
+            const semesterBadge = document.getElementById('semesterBadge');
             
             // عناصر نموذج المقترحات
             const suggestionsForm = document.getElementById('suggestionsForm');
@@ -1344,7 +1416,17 @@
             const submitBtn = document.getElementById('submitBtn');
             const hiddenFrame = document.getElementById('hiddenFrame');
             
-            let studentsData = {};
+            // روابط جداول البيانات
+            const SHEET_URLS = {
+                semester1: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqsnwzc-XWv5Tv-sEABj41rxAF2yLcF_9RWZO8pQZQc-TqOs9pBWeogMfoThdZk9dSlxtALM_NEFSb/pub?gid=1112476829&single=true&output=csv',
+                semester2: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqsnwzc-XWv5Tv-sEABj41rxAF2yLcF_9RWZO8pQZQc-TqOs9pBWeogMfoThdZk9dSlxtALM_NEFSb/pub?gid=1130276303&single=true&output=csv'
+            };
+            
+            // تخزين بيانات كلا الفصلين
+            let studentsData = {
+                semester1: {},
+                semester2: {}
+            };
 
             // رابط النشر لنموذج المقترحات
             const SCRIPT_URL = '';
@@ -1368,47 +1450,68 @@
                 }
             }
 
-            // تحميل البيانات من جدول البيانات
-            async function loadDataFromSheet() {
+            // تحميل البيانات من جدول البيانات للفصل المحدد
+            async function loadDataFromSheet(semester) {
                 try {
                     loadingIndicator.style.display = 'block';
                     errorMessage.style.display = 'none';
                     successMessage.style.display = 'none';
                     
-                    console.log('بدء تحميل البيانات من السجلات الرسمية...');
+                    console.log(`بدء تحميل بيانات ${semester === 'semester1' ? 'الفصل الأول' : 'الفصل الثاني'} من السجلات الرسمية...`);
                     
-                    const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTqsnwzc-XWv5Tv-sEABj41rxAF2yLcF_9RWZO8pQZQc-TqOs9pBWeogMfoThdZk9dSlxtALM_NEFSb/pub?gid=1130276303&single=true&output=csv');
+                    const response = await fetch(SHEET_URLS[semester]);
                     
                     if (!response.ok) {
                         throw new Error(`فشل في تحميل البيانات: ${response.status} ${response.statusText}`);
                     }
                     
                     const csvData = await response.text();
-                    console.log('تم تحميل البيانات بنجاح:', csvData);
                     
                     if (!csvData || csvData.trim().length === 0) {
                         throw new Error('البيانات المستلمة فارغة - يرجى التحقق من جدول البيانات');
                     }
                     
-                    studentsData = parseCSVData(csvData);
-                    console.log('بيانات الطلاب بعد المعالجة:', studentsData);
+                    const parsedData = parseCSVData(csvData);
+                    studentsData[semester] = parsedData;
                     
-                    if (Object.keys(studentsData).length > 0) {
-                        successMessage.textContent = `✅ تم تحميل بيانات ${Object.keys(studentsData).length} طالب من السجلات الرسمية`;
-                        successMessage.style.display = 'block';
-                    } else {
-                        throw new Error('لم يتم العثور على بيانات الطلاب في الجدول');
-                    }
+                    console.log(`تم تحميل بيانات ${Object.keys(parsedData).length} طالب للفصل ${semester === 'semester1' ? 'الأول' : 'الثاني'}`);
                     
-                    loadingIndicator.style.display = 'none';
-                    return true;
+                    successMessage.textContent = `✅ تم تحميل بيانات ${Object.keys(parsedData).length} طالب للفصل ${semester === 'semester1' ? 'الأول' : 'الثاني'}`;
+                    successMessage.style.display = 'block';
+                    
+                    return parsedData;
                 } catch (error) {
-                    console.error('حدث خطأ في تحميل البيانات:', error);
+                    console.error(`حدث خطأ في تحميل بيانات ${semester}:`, error);
                     loadingIndicator.style.display = 'none';
                     
-                    errorMessage.textContent = `❌ خطأ في تحميل البيانات: ${error.message}. يرجى التأكد من صحة الرابط وإعدادات النشر`;
+                    errorMessage.textContent = `❌ خطأ في تحميل بيانات ${semester === 'semester1' ? 'الفصل الأول' : 'الفصل الثاني'}: ${error.message}`;
                     errorMessage.style.display = 'block';
-                    return false;
+                    return {};
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                }
+            }
+
+            // تحميل بيانات كلا الفصلين عند بدء التشغيل
+            async function loadAllData() {
+                loadingIndicator.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                try {
+                    await Promise.all([
+                        loadDataFromSheet('semester1'),
+                        loadDataFromSheet('semester2')
+                    ]);
+                    
+                    const totalStudents = Object.keys(studentsData.semester1).length + Object.keys(studentsData.semester2).length;
+                    successMessage.textContent = `✅ تم تحميل بيانات جميع الفصول بنجاح (${totalStudents} سجل)`;
+                    successMessage.style.display = 'block';
+                } catch (error) {
+                    console.error('خطأ في تحميل البيانات:', error);
+                    errorMessage.textContent = '❌ فشل في تحميل البيانات. يرجى تحديث الصفحة والمحاولة مرة أخرى.';
+                    errorMessage.style.display = 'block';
+                } finally {
+                    loadingIndicator.style.display = 'none';
                 }
             }
 
@@ -1420,7 +1523,6 @@
                 if (lines.length < 2) return result;
                 
                 const headers = lines[0].split(',').map(header => header.trim());
-                console.log('عناوين الأعمدة:', headers);
                 
                 for (let i = 1; i < lines.length; i++) {
                     const currentLine = parseCSVLine(lines[i]);
@@ -1478,6 +1580,7 @@
             // البحث عن طالب
             searchBtn.addEventListener('click', function() {
                 const studentId = document.getElementById('studentId').value.trim().toUpperCase();
+                const selectedSemester = document.querySelector('input[name="semester"]:checked').value;
                 
                 if (!studentId) {
                     errorMessage.textContent = '❌ يرجى إدخال رقم الطالب';
@@ -1494,11 +1597,13 @@
                     return;
                 }
                 
-                if (studentsData[studentId]) {
-                    const student = studentsData[studentId];
-                    displayStudentData(student);
+                const semesterData = studentsData[selectedSemester];
+                
+                if (semesterData && semesterData[studentId]) {
+                    const student = semesterData[studentId];
+                    displayStudentData(student, selectedSemester);
                 } else {
-                    errorMessage.textContent = '❌ رقم الطالب غير موجود في السجلات الرسمية. يرجى التحقق من الرقم والمحاولة مرة أخرى.';
+                    errorMessage.textContent = `❌ رقم الطالب غير موجود في سجلات ${selectedSemester === 'semester1' ? 'الفصل الأول' : 'الفصل الثاني'}. يرجى التحقق من الرقم والمحاولة مرة أخرى.`;
                     errorMessage.style.display = 'block';
                     successMessage.style.display = 'none';
                     studentInfo.classList.remove('active');
@@ -1506,9 +1611,10 @@
             });
 
             // عرض بيانات الطالب
-            function displayStudentData(student) {
+            function displayStudentData(student, semester) {
                 document.getElementById('studentName').textContent = student.name;
                 document.getElementById('studentClass').textContent = student.class;
+                semesterBadge.textContent = semester === 'semester1' ? 'الفصل الدراسي الأول' : 'الفصل الدراسي الثاني';
                 
                 document.getElementById('tilaawaGrade').textContent = student.tilaawa;
                 document.getElementById('hifzGrade').textContent = student.hifz;
@@ -1554,7 +1660,7 @@
                 });
             }
 
-            // التعامل مع القائمة المنسدلة - تم التعديل
+            // التعامل مع القائمة المنسدلة
             menuBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 dropdownMenu.classList.toggle('show');
@@ -1577,7 +1683,7 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const section = this.getAttribute('data-section');
-                    dropdownMenu.classList.remove('show'); // إخفاء القائمة عند النقر
+                    dropdownMenu.classList.remove('show');
                     
                     switch(section) {
                         case 'news':
@@ -1625,21 +1731,6 @@
                     document.getElementById('hiddenImpact').value = document.querySelector('input[name="impactLevel"]:checked')?.value || 'غير محدد';
                     document.getElementById('hiddenFollowup').value = document.querySelector('input[name="followup"]:checked').value;
                     document.getElementById('hiddenImprovementIdeas').value = document.getElementById('improvementIdeas').value || 'لا توجد';
-                    
-                    console.log('بيانات النموذج المرسلة:', {
-                        timestamp: document.getElementById('hiddenTimestamp').value,
-                        senderType: document.getElementById('hiddenSenderType').value,
-                        fullName: document.getElementById('hiddenFullName').value,
-                        contactInfo: document.getElementById('hiddenContactInfo').value,
-                        studentId: document.getElementById('hiddenStudentId').value,
-                        suggestionType: document.getElementById('hiddenSuggestionType').value,
-                        category: document.getElementById('hiddenCategory').value,
-                        title: document.getElementById('hiddenTitle').value,
-                        details: document.getElementById('hiddenDetails').value,
-                        impact: document.getElementById('hiddenImpact').value,
-                        followup: document.getElementById('hiddenFollowup').value,
-                        improvementIdeas: document.getElementById('hiddenImprovementIdeas').value
-                    });
                     
                     // إرسال النموذج المخفي
                     hiddenForm.submit();
@@ -1730,13 +1821,8 @@
             });
 
             // تحميل البيانات عند بدء التشغيل
-            loadDataFromSheet();
+            loadAllData();
         });
     </script>
 </body>
 </html>
-
-
-
-
-
